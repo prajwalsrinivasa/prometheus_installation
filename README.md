@@ -237,3 +237,4 @@ spec:
  ```
  ** 
  I have installed Kubernetes in local so i have used NodePort service to access the same like localhost:/<nodeport>/ = localhost:30000 and here 30000 is the nodeport number
+  
