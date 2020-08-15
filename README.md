@@ -1,7 +1,7 @@
 # prometheus_installation
 Installs prometheus in single command via kubernetes
 If you have cluster up and running and need prometheus on top of that then execute the following command in your cluster.
-kubectl create -f https://raw.githubusercontent.com/prajwalsrinivasa/prometheus_installation/master/prometheus-deployment.yaml
+**kubectl create -f https://raw.githubusercontent.com/prajwalsrinivasa/prometheus_installation/master/prometheus-deployment.yaml
 
 What this Yaml consists of 
 
