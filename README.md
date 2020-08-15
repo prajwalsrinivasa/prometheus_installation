@@ -6,16 +6,18 @@ kubectl create -f https://raw.githubusercontent.com/prajwalsrinivasa/prometheus_
 What this Yaml consists of 
 
 #Step1
-Which creats Namespace called monitoring
+Which creates Namespace called monitoring-v1
+```
 apiVersion: v1
 kind: Namespace
 metadata:
   name: monitoring-v1
   labels:
     name: monitoring-v1
-   
+```   
 #Step2
 Creates a Clusterrole to get access for the resources like nodes,services,endpoints and pods etc.
+```
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
@@ -36,9 +38,11 @@ rules:
   verbs: ["get", "list", "watch"]
 - nonResourceURLs: ["/metrics"]
   verbs: ["get"]
+ ```
     
 #step3
- Creates Clusterrolebinding for the clusterrole which is created in the step2
+Creates Clusterrolebinding for the clusterrole which is created in the step2
+```
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -51,9 +55,11 @@ subjects:
 - kind: ServiceAccount
   name: default
   namespace: monitoring-v1
+```
   
 #step4
 Creates ConfigMap for the prometheus
+```
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -167,8 +173,10 @@ data:
         - source_labels: [__meta_kubernetes_service_name]
           action: replace
           target_label: kubernetes_name
+```
 #Step5
-Creates the Deployment 
+Creates the Deployment
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -205,8 +213,10 @@ spec:
 
         - name: prometheus-storage-volume
           emptyDir: {}
+ ```
  #Step6
- Creates the Service called prometheus-service
+Creates the Service called prometheus-service
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -224,3 +234,4 @@ spec:
     - port: 8080
       targetPort: 9090
       nodePort: 30000
+ ```
